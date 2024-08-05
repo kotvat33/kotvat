@@ -1,146 +1,470 @@
-<html><head><base href="https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/" /></head>
+<html><head><base href="https://gammaos.virtual.system/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GammaOS</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    overflow: hidden;
+  }
+  #desktop {
+    height: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+  }
+  #taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background-color: rgba(52, 73, 94, 0.8);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1000;
+  }
+  .start-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  #clock {
+    margin-left: auto;
+    font-size: 14px;
+  }
+  .window {
+    position: absolute;
+    background-color: rgba(236, 240, 241, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    overflow: hidden;
+    width: 400px;
+    height: 300px;
+  }
+  .window-header {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .window-title {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  .window-controls {
+    display: flex;
+  }
+  .window-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  .window-content {
+    padding: 10px;
+    color: #2c3e50;
+    height: calc(100% - 30px);
+    overflow-y: auto;
+  }
+  .icon {
+    width: 64px;
+    height: 64px;
+    margin: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .icon svg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 5px;
+  }
+  .icon-label {
+    font-size: 12px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  }
+  #start-menu {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 600px;
+    height: 400px;
+    background-color: white;
+    border: 2px solid rgba(52, 73, 94, 0.8);
+    display: none;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    animation: slideUp 0.3s ease-out;
+    z-index: 1001;
+  }
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  .start-menu-content {
+    display: flex;
+    height: 100%;
+  }
+  .start-menu-column {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  .start-menu-item {
+    padding: 5px;
+    cursor: pointer;
+    color: #2c3e50;
+  }
+  .start-menu-item:hover {
+    background-color: #ecf0f1;
+  }
+  .app-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .app-content textarea, .app-content input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .app-content button {
+    align-self: flex-start;
+  }
+</style>
+</head>
 <body>
-  <div id="container"></div>
-  <div id="overlay">kotvat33</div>
+<div id="desktop" style="background-image: url('https://img.freepik.com/premium-vector/gradient-abstract-shape-background-with-blue-purple-color-design_288411-500.jpg'); background-size: cover; background-position: center;">
+  <div class="icon" onclick="openWindow('My Computer')">
+    <svg viewBox="0 0 24 24">
+      <path fill="white" d="M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z" />
+    </svg>
+    <span class="icon-label">My Computer</span>
+  </div>
+  <div class="icon" onclick="openWindow('Recycle Bin')">
+    <svg viewBox="0 0 24 24">
+      <path fill="white" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+    </svg>
+    <span class="icon-label">Recycle Bin</span>
+  </div>
+  <div class="icon" onclick="openWindow('Documents')">
+    <svg viewBox="0 0 24 24">
+      <path fill="white" d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z" />
+    </svg>
+    <span class="icon-label">Documents</span>
+  </div>
+</div>
 
-  <script type="module">
-    import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
+<div id="taskbar">
+  <button class="start-button" onclick="toggleStartMenu()">Start</button>
+  <div id="clock"></div>
+</div>
 
-    let camera, scene, renderer;
-    let uniforms;
+<div id="start-menu">
+  <div class="start-menu-content">
+    <div class="start-menu-column">
+      <div class="start-menu-item" onclick="openWindow('My Computer')">My Computer</div>
+      <div class="start-menu-item" onclick="openWindow('Documents')">Documents</div>
+      <div class="start-menu-item" onclick="openWindow('Pictures')">Pictures</div>
+      <div class="start-menu-item" onclick="openWindow('Music')">Music</div>
+    </div>
+    <div class="start-menu-column">
+      <div class="start-menu-item" onclick="openWindow('Control Panel')">Control Panel</div>
+      <div class="start-menu-item" onclick="openWindow('Settings')">Settings</div>
+      <div class="start-menu-item" onclick="openWindow('Devices')">Devices</div>
+      <div class="start-menu-item" onclick="openWindow('Network')">Network</div>
+    </div>
+    <div class="start-menu-column">
+      <div class="start-menu-item" onclick="openWindow('Calculator')">Calculator</div>
+      <div class="start-menu-item" onclick="openWindow('Notepad')">Notepad</div>
+      <div class="start-menu-item" onclick="openWindow('Paint')">Paint</div>
+    </div>
+  </div>
+</div>
 
-    init();
-    animate();
+<script>
+let zIndex = 1;
+const apps = {
+  'My Computer': {
+    content: `
+      <h2>My Computer</h2>
+      <ul>
+        <li>Local Disk (C:)</li>
+        <li>USB Drive (D:)</li>
+        <li>Network Drive (Z:)</li>
+      </ul>
+    `
+  },
+  'Recycle Bin': {
+    content: `
+      <h2>Recycle Bin</h2>
+      <p>The Recycle Bin is empty.</p>
+      <button onclick="alert('Recycle Bin emptied!')">Empty Recycle Bin</button>
+    `
+  },
+  'Documents': {
+    content: `
+      <h2>Documents</h2>
+      <ul>
+        <li>Report.docx</li>
+        <li>Budget.xlsx</li>
+        <li>Presentation.pptx</li>
+      </ul>
+    `
+  },
+  'Pictures': {
+    content: `
+      <h2>Pictures</h2>
+      <ul>
+        <li>Vacation.jpg</li>
+        <li>Family.png</li>
+        <li>Party.gif</li>
+      </ul>
+    `
+  },
+  'Music': {
+    content: `
+      <h2>Music</h2>
+      <ul>
+        <li>Song1.mp3</li>
+        <li>Album.flac</li>
+        <li>Playlist.m3u</li>
+      </ul>
+    `
+  },
+  'Control Panel': {
+    content: `
+      <h2>Control Panel</h2>
+      <button onclick="alert('Settings changed!')">Change System Settings</button>
+      <button onclick="alert('Updates checked!')">Check for Updates</button>
+    `
+  },
+  'Settings': {
+    content: `
+      <h2>Settings</h2>
+      <label><input type="checkbox"> Dark Mode</label><br>
+      <label><input type="checkbox"> Notifications</label><br>
+      <button onclick="alert('Settings saved!')">Save Settings</button>
+    `
+  },
+  'Devices': {
+    content: `
+      <h2>Devices</h2>
+      <ul>
+        <li>Printer</li>
+        <li>Webcam</li>
+        <li>Speakers</li>
+      </ul>
+      <button onclick="alert('Devices scanned!')">Scan for New Devices</button>
+    `
+  },
+  'Network': {
+    content: `
+      <h2>Network</h2>
+      <p>Status: Connected</p>
+      <button onclick="alert('Network reset!')">Reset Network</button>
+    `
+  },
+  'Calculator': {
+    content: `
+      <h2>Calculator</h2>
+      <input type="text" id="calc-result" readonly>
+      <br>
+      <button onclick="document.getElementById('calc-result').value += '7'">7</button>
+      <button onclick="document.getElementById('calc-result').value += '8'">8</button>
+      <button onclick="document.getElementById('calc-result').value += '9'">9</button>
+      <button onclick="document.getElementById('calc-result').value += '+'">&plus;</button>
+      <br>
+      <button onclick="document.getElementById('calc-result').value += '4'">4</button>
+      <button onclick="document.getElementById('calc-result').value += '5'">5</button>
+      <button onclick="document.getElementById('calc-result').value += '6'">6</button>
+      <button onclick="document.getElementById('calc-result').value += '-'">&minus;</button>
+      <br>
+      <button onclick="document.getElementById('calc-result').value += '1'">1</button>
+      <button onclick="document.getElementById('calc-result').value += '2'">2</button>
+      <button onclick="document.getElementById('calc-result').value += '3'">3</button>
+      <button onclick="document.getElementById('calc-result').value += '*'">&times;</button>
+      <br>
+      <button onclick="document.getElementById('calc-result').value += '0'">0</button>
+      <button onclick="document.getElementById('calc-result').value += '.'">&period;</button>
+      <button onclick="document.getElementById('calc-result').value = eval(document.getElementById('calc-result').value)">&equals;</button>
+      <button onclick="document.getElementById('calc-result').value += '/'">&divide;</button>
+      <br>
+      <button onclick="document.getElementById('calc-result').value = ''">Clear</button>
+    `
+  },
+  'Notepad': {
+    content: `
+      <h2>Notepad</h2>
+      <textarea rows="10" cols="50"></textarea>
+      <br>
+      <button onclick="alert('Note saved!')">Save</button>
+    `
+  },
+  'Paint': {
+    content: `
+      <h2>Paint</h2>
+      <canvas id="paint-canvas" width="300" height="200" style="border:1px solid #000000;"></canvas>
+      <br>
+      <button onclick="startPainting()">Start Painting</button>
+      <button onclick="clearCanvas()">Clear</button>
+    `
+  }
+};
 
-    function init() {
-      const container = document.getElementById('container');
+function openWindow(title) {
+  const window = document.createElement('div');
+  window.className = 'window';
+  window.style.left = '100px';
+  window.style.top = '100px';
+  window.style.zIndex = zIndex++;
 
-      camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  window.innerHTML = `
+    <div class="window-header">
+      <span class="window-title">${title}</span>
+      <div class="window-controls">
+        <button class="window-button" onclick="minimizeWindow(this)">&#8722;</button>
+        <button class="window-button" onclick="maximizeWindow(this)">&#9633;</button>
+        <button class="window-button" onclick="closeWindow(this)">✖</button>
+      </div>
+    </div>
+    <div class="window-content">
+      ${apps[title].content}
+    </div>
+  `;
 
-      scene = new THREE.Scene();
+  document.getElementById('desktop').appendChild(window);
+  makeWindowDraggable(window);
 
-      const geometry = new THREE.PlaneGeometry(2, 2);
+  if (title === 'Paint') {
+    initPaint();
+  }
+}
 
-      uniforms = {
-        time: { value: 1.0 },
-        resolution: { value: new THREE.Vector2() }
-      };
+function closeWindow(button) {
+  button.closest('.window').remove();
+}
 
-      const material = new THREE.ShaderMaterial({
-        uniforms: uniforms,
-        vertexShader: `
-          void main() {
-            gl_Position = vec4(position, 1.0);
-          }
-        `,
-        fragmentShader: `
-          uniform vec2 resolution;
-          uniform float time;
+function minimizeWindow(button) {
+  const window = button.closest('.window');
+  window.style.display = 'none';
+  // TODO: Add minimized window to taskbar
+}
 
-          vec3 palette(float t) {
-            vec3 a = vec3(0.3, 0.3, 0.3);
-            vec3 b = vec3(0.3, 0.3, 0.3);
-            vec3 c = vec3(0.8, 0.8, 0.8);
-            vec3 d = vec3(0.163, 0.316, 0.457);
-            return a + b * cos(6.28318 * (c * t + d));
-          }
+function maximizeWindow(button) {
+  const window = button.closest('.window');
+  if (window.style.width === '100%' && window.style.height === 'calc(100% - 40px)') {
+    window.style.width = '400px';
+    window.style.height = '300px';
+    window.style.top = '100px';
+    window.style.left = '100px';
+  } else {
+    window.style.width = '100%';
+    window.style.height = 'calc(100% - 40px)';
+    window.style.top = '0';
+    window.style.left = '0';
+  }
+}
 
-          void main() {
-            vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
-            vec2 uv0 = uv;
-            vec3 finalColor = vec3(0.0);
+function makeWindowDraggable(window) {
+  const header = window.querySelector('.window-header');
+  let isDragging = false;
+  let offsetX, offsetY;
 
-            for (float i = 0.0; i < 4.0; i++) {
-              uv = fract(uv * 1.5) - 0.5;
-
-              float d = length(uv) * exp(-length(uv0));
-
-              vec3 col = palette(length(uv0) + i * 0.4 + time * 0.4);
-
-              d = sin(d * 8.0 + time) / 8.0;
-              d = abs(d);
-              d = pow(0.01 / d, 1.2);
-
-              finalColor += col * d;
-            }
-
-            finalColor *= 0.6; // Darken the shader
-
-            gl_FragColor = vec4(finalColor, 1.0);
-          }
-        `
-      });
-
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-
-      renderer = new THREE.WebGLRenderer();
-      renderer.setPixelRatio(window.devicePixelRatio);
-      container.appendChild(renderer.domElement);
-
-      onWindowResize();
-      window.addEventListener('resize', onWindowResize);
+  header.addEventListener('mousedown', (e) => {
+    if (e.target === header) {
+      isDragging = true;
+      offsetX = e.clientX - window.offsetLeft;
+      offsetY = e.clientY - window.offsetTop;
+      window.style.zIndex = zIndex++;
     }
+  });
 
-    function onWindowResize() {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      uniforms.resolution.value.x = renderer.domElement.width;
-      uniforms.resolution.value.y = renderer.domElement.height;
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      window.style.left = (e.clientX - offsetX) + 'px';
+      window.style.top = (e.clientY - offsetY) + 'px';
     }
+  });
 
-    function animate() {
-      requestAnimationFrame(animate);
-      render();
-    }
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+}
 
-    function render() {
-      uniforms.time.value = performance.now() / 1000;
-      renderer.render(scene, camera);
-    }
-  </script>
+function updateClock() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString();
+  document.getElementById('clock').textContent = timeString;
+}
 
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
-    #container {
-      width: 100vw;
-      height: 100vh;
-    }
-    #overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 5vw;
-      color: #ffffff;
-      text-shadow: 
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 30px #fff,
-        0 0 40px #ff00de,
-        0 0 70px #ff00de,
-        0 0 80px #ff00de,
-        0 0 100px #ff00de,
-        0 0 150px #ff00de;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      50% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.1);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
-    }
-  </style>
-</body>
-</html>
+setInterval(updateClock, 1000);
+updateClock();
+
+function toggleStartMenu() {
+  const startMenu = document.getElementById('start-menu');
+  startMenu.style.display = startMenu.style.display === 'none' ? 'block' : 'none';
+}
+
+document.addEventListener('click', (e) => {
+  const startMenu = document.getElementById('start-menu');
+  const startButton = document.querySelector('.start-button');
+  if (!startMenu.contains(e.target) && e.target !== startButton) {
+    startMenu.style.display = 'none';
+  }
+});
+
+function initPaint() {
+  const canvas = document.getElementById('paint-canvas');
+  const ctx = canvas.getContext('2d');
+  let painting = false;
+
+  function startPosition(e) {
+    painting = true;
+    draw(e);
+  }
+
+  function endPosition() {
+    painting = false;
+    ctx.beginPath();
+  }
+
+  function draw(e) {
+    if (!painting) return;
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+  }
+
+  window.startPainting = function() {
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
+  };
+
+  window.clearCanvas = function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+}
+</script>
+</body></html>
