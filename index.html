@@ -1,470 +1,111 @@
-<html><head><base href="https://gammaos.virtual.system/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GammaOS</title>
+<html><head><base href="https://www.kotvat33.com/" target="_blank"><title>Kotvat33 Search</title>
 <style>
-  body, html {
+body, html {
+    height: 100%;
     margin: 0;
     padding: 0;
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    overflow: hidden;
-  }
-  #desktop {
-    height: 100%;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-  }
-  #taskbar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40px;
-    background-color: rgba(52, 73, 94, 0.8);
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    z-index: 1000;
-  }
-  .start-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 5px 15px;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  #clock {
-    margin-left: auto;
-    font-size: 14px;
-  }
-  .window {
-    position: absolute;
-    background-color: rgba(236, 240, 241, 0.9);
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    overflow: hidden;
-    width: 400px;
-    height: 300px;
-  }
-  .window-header {
-    background-color: #3498db;
-    color: white;
-    padding: 5px 10px;
-    cursor: move;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .window-title {
-    flex-grow: 1;
-    margin-right: 10px;
-  }
-  .window-controls {
-    display: flex;
-  }
-  .window-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin-left: 5px;
-  }
-  .window-content {
-    padding: 10px;
-    color: #2c3e50;
-    height: calc(100% - 30px);
-    overflow-y: auto;
-  }
-  .icon {
-    width: 64px;
-    height: 64px;
-    margin: 10px;
-    cursor: pointer;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-  }
-  .icon svg {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 5px;
-  }
-  .icon-label {
-    font-size: 12px;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-  }
-  #start-menu {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    width: 600px;
-    height: 400px;
+    justify-content: center;
+    height: 100%;
+}
+.logo {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+.search-box {
+    width: 80%;
+    max-width: 584px;
+    height: 44px;
+    border: 2px solid #333;
+    border-radius: 24px;
+    padding: 5px 8px 0 16px;
+    display: flex;
+    align-items: center;
     background-color: white;
-    border: 2px solid rgba(52, 73, 94, 0.8);
-    display: none;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-    animation: slideUp 0.3s ease-out;
-    z-index: 1001;
-  }
-  @keyframes slideUp {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-  .start-menu-content {
-    display: flex;
-    height: 100%;
-  }
-  .start-menu-column {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.search-input {
     flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-  }
-  .start-menu-item {
-    padding: 5px;
+    height: 34px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: transparent;
+}
+.search-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0 8px;
     cursor: pointer;
-    color: #2c3e50;
-  }
-  .start-menu-item:hover {
-    background-color: #ecf0f1;
-  }
-  .app-content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .app-content textarea, .app-content input {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .app-content button {
-    align-self: flex-start;
-  }
+}
+.buttons {
+    margin-top: 18px;
+}
+.button {
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    margin: 11px 4px;
+    padding: 0 16px;
+    line-height: 36px;
+    height: 36px;
+    min-width: 54px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s;
+}
+.button:hover {
+    background-color: #555;
+}
 </style>
 </head>
 <body>
-<div id="desktop" style="background-image: url('https://img.freepik.com/premium-vector/gradient-abstract-shape-background-with-blue-purple-color-design_288411-500.jpg'); background-size: cover; background-position: center;">
-  <div class="icon" onclick="openWindow('My Computer')">
-    <svg viewBox="0 0 24 24">
-      <path fill="white" d="M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z" />
-    </svg>
-    <span class="icon-label">My Computer</span>
-  </div>
-  <div class="icon" onclick="openWindow('Recycle Bin')">
-    <svg viewBox="0 0 24 24">
-      <path fill="white" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
-    </svg>
-    <span class="icon-label">Recycle Bin</span>
-  </div>
-  <div class="icon" onclick="openWindow('Documents')">
-    <svg viewBox="0 0 24 24">
-      <path fill="white" d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z" />
-    </svg>
-    <span class="icon-label">Documents</span>
-  </div>
-</div>
-
-<div id="taskbar">
-  <button class="start-button" onclick="toggleStartMenu()">Start</button>
-  <div id="clock"></div>
-</div>
-
-<div id="start-menu">
-  <div class="start-menu-content">
-    <div class="start-menu-column">
-      <div class="start-menu-item" onclick="openWindow('My Computer')">My Computer</div>
-      <div class="start-menu-item" onclick="openWindow('Documents')">Documents</div>
-      <div class="start-menu-item" onclick="openWindow('Pictures')">Pictures</div>
-      <div class="start-menu-item" onclick="openWindow('Music')">Music</div>
+<div class="container">
+    <div class="logo">Kotvat33</div>
+    <div class="search-box">
+        <input type="text" class="search-input" placeholder="Search Kotvat33 or type a URL">
+        <svg class="search-icon" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#333"></path>
+        </svg>
     </div>
-    <div class="start-menu-column">
-      <div class="start-menu-item" onclick="openWindow('Control Panel')">Control Panel</div>
-      <div class="start-menu-item" onclick="openWindow('Settings')">Settings</div>
-      <div class="start-menu-item" onclick="openWindow('Devices')">Devices</div>
-      <div class="start-menu-item" onclick="openWindow('Network')">Network</div>
+    <div class="buttons">
+        <button class="button">Kotvat33 Search</button>
+        <button class="button">I'm Feeling Curious</button>
     </div>
-    <div class="start-menu-column">
-      <div class="start-menu-item" onclick="openWindow('Calculator')">Calculator</div>
-      <div class="start-menu-item" onclick="openWindow('Notepad')">Notepad</div>
-      <div class="start-menu-item" onclick="openWindow('Paint')">Paint</div>
-    </div>
-  </div>
 </div>
 
 <script>
-let zIndex = 1;
-const apps = {
-  'My Computer': {
-    content: `
-      <h2>My Computer</h2>
-      <ul>
-        <li>Local Disk (C:)</li>
-        <li>USB Drive (D:)</li>
-        <li>Network Drive (Z:)</li>
-      </ul>
-    `
-  },
-  'Recycle Bin': {
-    content: `
-      <h2>Recycle Bin</h2>
-      <p>The Recycle Bin is empty.</p>
-      <button onclick="alert('Recycle Bin emptied!')">Empty Recycle Bin</button>
-    `
-  },
-  'Documents': {
-    content: `
-      <h2>Documents</h2>
-      <ul>
-        <li>Report.docx</li>
-        <li>Budget.xlsx</li>
-        <li>Presentation.pptx</li>
-      </ul>
-    `
-  },
-  'Pictures': {
-    content: `
-      <h2>Pictures</h2>
-      <ul>
-        <li>Vacation.jpg</li>
-        <li>Family.png</li>
-        <li>Party.gif</li>
-      </ul>
-    `
-  },
-  'Music': {
-    content: `
-      <h2>Music</h2>
-      <ul>
-        <li>Song1.mp3</li>
-        <li>Album.flac</li>
-        <li>Playlist.m3u</li>
-      </ul>
-    `
-  },
-  'Control Panel': {
-    content: `
-      <h2>Control Panel</h2>
-      <button onclick="alert('Settings changed!')">Change System Settings</button>
-      <button onclick="alert('Updates checked!')">Check for Updates</button>
-    `
-  },
-  'Settings': {
-    content: `
-      <h2>Settings</h2>
-      <label><input type="checkbox"> Dark Mode</label><br>
-      <label><input type="checkbox"> Notifications</label><br>
-      <button onclick="alert('Settings saved!')">Save Settings</button>
-    `
-  },
-  'Devices': {
-    content: `
-      <h2>Devices</h2>
-      <ul>
-        <li>Printer</li>
-        <li>Webcam</li>
-        <li>Speakers</li>
-      </ul>
-      <button onclick="alert('Devices scanned!')">Scan for New Devices</button>
-    `
-  },
-  'Network': {
-    content: `
-      <h2>Network</h2>
-      <p>Status: Connected</p>
-      <button onclick="alert('Network reset!')">Reset Network</button>
-    `
-  },
-  'Calculator': {
-    content: `
-      <h2>Calculator</h2>
-      <input type="text" id="calc-result" readonly>
-      <br>
-      <button onclick="document.getElementById('calc-result').value += '7'">7</button>
-      <button onclick="document.getElementById('calc-result').value += '8'">8</button>
-      <button onclick="document.getElementById('calc-result').value += '9'">9</button>
-      <button onclick="document.getElementById('calc-result').value += '+'">&plus;</button>
-      <br>
-      <button onclick="document.getElementById('calc-result').value += '4'">4</button>
-      <button onclick="document.getElementById('calc-result').value += '5'">5</button>
-      <button onclick="document.getElementById('calc-result').value += '6'">6</button>
-      <button onclick="document.getElementById('calc-result').value += '-'">&minus;</button>
-      <br>
-      <button onclick="document.getElementById('calc-result').value += '1'">1</button>
-      <button onclick="document.getElementById('calc-result').value += '2'">2</button>
-      <button onclick="document.getElementById('calc-result').value += '3'">3</button>
-      <button onclick="document.getElementById('calc-result').value += '*'">&times;</button>
-      <br>
-      <button onclick="document.getElementById('calc-result').value += '0'">0</button>
-      <button onclick="document.getElementById('calc-result').value += '.'">&period;</button>
-      <button onclick="document.getElementById('calc-result').value = eval(document.getElementById('calc-result').value)">&equals;</button>
-      <button onclick="document.getElementById('calc-result').value += '/'">&divide;</button>
-      <br>
-      <button onclick="document.getElementById('calc-result').value = ''">Clear</button>
-    `
-  },
-  'Notepad': {
-    content: `
-      <h2>Notepad</h2>
-      <textarea rows="10" cols="50"></textarea>
-      <br>
-      <button onclick="alert('Note saved!')">Save</button>
-    `
-  },
-  'Paint': {
-    content: `
-      <h2>Paint</h2>
-      <canvas id="paint-canvas" width="300" height="200" style="border:1px solid #000000;"></canvas>
-      <br>
-      <button onclick="startPainting()">Start Painting</button>
-      <button onclick="clearCanvas()">Clear</button>
-    `
-  }
-};
-
-function openWindow(title) {
-  const window = document.createElement('div');
-  window.className = 'window';
-  window.style.left = '100px';
-  window.style.top = '100px';
-  window.style.zIndex = zIndex++;
-
-  window.innerHTML = `
-    <div class="window-header">
-      <span class="window-title">${title}</span>
-      <div class="window-controls">
-        <button class="window-button" onclick="minimizeWindow(this)">&#8722;</button>
-        <button class="window-button" onclick="maximizeWindow(this)">&#9633;</button>
-        <button class="window-button" onclick="closeWindow(this)">✖</button>
-      </div>
-    </div>
-    <div class="window-content">
-      ${apps[title].content}
-    </div>
-  `;
-
-  document.getElementById('desktop').appendChild(window);
-  makeWindowDraggable(window);
-
-  if (title === 'Paint') {
-    initPaint();
-  }
-}
-
-function closeWindow(button) {
-  button.closest('.window').remove();
-}
-
-function minimizeWindow(button) {
-  const window = button.closest('.window');
-  window.style.display = 'none';
-  // TODO: Add minimized window to taskbar
-}
-
-function maximizeWindow(button) {
-  const window = button.closest('.window');
-  if (window.style.width === '100%' && window.style.height === 'calc(100% - 40px)') {
-    window.style.width = '400px';
-    window.style.height = '300px';
-    window.style.top = '100px';
-    window.style.left = '100px';
-  } else {
-    window.style.width = '100%';
-    window.style.height = 'calc(100% - 40px)';
-    window.style.top = '0';
-    window.style.left = '0';
-  }
-}
-
-function makeWindowDraggable(window) {
-  const header = window.querySelector('.window-header');
-  let isDragging = false;
-  let offsetX, offsetY;
-
-  header.addEventListener('mousedown', (e) => {
-    if (e.target === header) {
-      isDragging = true;
-      offsetX = e.clientX - window.offsetLeft;
-      offsetY = e.clientY - window.offsetTop;
-      window.style.zIndex = zIndex++;
+document.querySelector('.search-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        performSearch();
     }
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-      window.style.left = (e.clientX - offsetX) + 'px';
-      window.style.top = (e.clientY - offsetY) + 'px';
-    }
-  });
-
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-  });
-}
-
-function updateClock() {
-  const now = new Date();
-  const timeString = now.toLocaleTimeString();
-  document.getElementById('clock').textContent = timeString;
-}
-
-setInterval(updateClock, 1000);
-updateClock();
-
-function toggleStartMenu() {
-  const startMenu = document.getElementById('start-menu');
-  startMenu.style.display = startMenu.style.display === 'none' ? 'block' : 'none';
-}
-
-document.addEventListener('click', (e) => {
-  const startMenu = document.getElementById('start-menu');
-  const startButton = document.querySelector('.start-button');
-  if (!startMenu.contains(e.target) && e.target !== startButton) {
-    startMenu.style.display = 'none';
-  }
 });
 
-function initPaint() {
-  const canvas = document.getElementById('paint-canvas');
-  const ctx = canvas.getContext('2d');
-  let painting = false;
+document.querySelector('.search-icon').addEventListener('click', performSearch);
 
-  function startPosition(e) {
-    painting = true;
-    draw(e);
-  }
+document.querySelectorAll('.button')[0].addEventListener('click', performSearch);
 
-  function endPosition() {
-    painting = false;
-    ctx.beginPath();
-  }
+document.querySelectorAll('.button')[1].addEventListener('click', function() {
+    alert("You're curious! That's great. Kotvat33 encourages curiosity and learning.");
+});
 
-  function draw(e) {
-    if (!painting) return;
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-  }
-
-  window.startPainting = function() {
-    canvas.addEventListener('mousedown', startPosition);
-    canvas.addEventListener('mouseup', endPosition);
-    canvas.addEventListener('mousemove', draw);
-  };
-
-  window.clearCanvas = function() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  };
+function performSearch() {
+    let query = encodeURIComponent(document.querySelector('.search-input').value);
+    alert(`Searching Kotvat33 for: ${decodeURIComponent(query)}`);
+    // In a real implementation, this would redirect to a search results page
+    // window.location.href = `https://www.kotvat33.com/search?q=${query}`;
 }
 </script>
 </body></html>
