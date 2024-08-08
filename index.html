@@ -1,111 +1,16 @@
-<html><head><base href="https://www.kotvat33.com/" target="_blank"><title>Kotvat33 Search</title>
-<style>
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-.logo {
-    font-size: 48px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-.search-box {
-    width: 80%;
-    max-width: 584px;
-    height: 44px;
-    border: 2px solid #333;
-    border-radius: 24px;
-    padding: 5px 8px 0 16px;
-    display: flex;
-    align-items: center;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.search-input {
-    flex: 1;
-    height: 34px;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    background-color: transparent;
-}
-.search-icon {
-    width: 24px;
-    height: 24px;
-    margin: 0 8px;
-    cursor: pointer;
-}
-.buttons {
-    margin-top: 18px;
-}
-.button {
-    background-color: #333;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 14px;
-    margin: 11px 4px;
-    padding: 0 16px;
-    line-height: 36px;
-    height: 36px;
-    min-width: 54px;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    transition: background-color 0.3s;
-}
-.button:hover {
-    background-color: #555;
-}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Скачать файл по кнопке</title>
 </head>
 <body>
-<div class="container">
-    <div class="logo">Kotvat33</div>
-    <div class="search-box">
-        <input type="text" class="search-input" placeholder="Search Kotvat33 or type a URL">
-        <svg class="search-icon" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#333"></path>
-        </svg>
-    </div>
-    <div class="buttons">
-        <button class="button">Kotvat33 Search</button>
-        <button class="button">I'm Feeling Curious</button>
-    </div>
-</div>
 
-<script>
-document.querySelector('.search-input').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        performSearch();
-    }
-});
+<!-- Кнопка для скачивания файла -->
+<a href="/path/to/your/file.pdf" download="filename.pdf">
+  <button>Скачать файл</button>
+</a>
 
-document.querySelector('.search-icon').addEventListener('click', performSearch);
-
-document.querySelectorAll('.button')[0].addEventListener('click', performSearch);
-
-document.querySelectorAll('.button')[1].addEventListener('click', function() {
-    alert("You're curious! That's great. Kotvat33 encourages curiosity and learning.");
-});
-
-function performSearch() {
-    let query = encodeURIComponent(document.querySelector('.search-input').value);
-    alert(`Searching Kotvat33 for: ${decodeURIComponent(query)}`);
-    // In a real implementation, this would redirect to a search results page
-    // window.location.href = `https://www.kotvat33.com/search?q=${query}`;
-}
-</script>
-</body></html>
+</body>
+</html>
